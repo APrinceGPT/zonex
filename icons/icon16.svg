@@ -1,0 +1,23 @@
+<!-- Professional globe icon with timezone rings -->
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#4f46e5" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- Globe outline -->
+  <circle cx="50" cy="50" r="35" fill="none" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- Timezone rings -->
+  <circle cx="50" cy="50" r="25" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.7"/>
+  <circle cx="50" cy="50" r="15" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Meridian lines -->
+  <line x1="50" y1="15" x2="50" y2="85" stroke="#ffffff" stroke-width="1" opacity="0.8"/>
+  <line x1="15" y1="50" x2="85" y2="50" stroke="#ffffff" stroke-width="1" opacity="0.8"/>
+  
+  <!-- Clock hands -->
+  <line x1="50" y1="50" x2="50" y2="35" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <line x1="50" y1="50" x2="60" y2="50" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Center dot -->
+  <circle cx="50" cy="50" r="2" fill="#ffffff"/>
+</svg>

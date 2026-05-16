@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=480">
+    <title>Zonex - Timezone Converter</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+
+    <!-- ── Header ── -->
+    <header class="header" role="banner">
+        <div class="header-content">
+            <div class="logo" aria-label="Zonex">
+                <i class="fas fa-globe-americas" aria-hidden="true"></i>
+                <span>Zonex</span>
+            </div>
+            <div class="header-clock">
+                <span class="header-time" id="currentTime" aria-live="polite" aria-atomic="true">12:00 PM</span>
+                <span class="header-tz" id="currentTimezone">Manila · GMT+8</span>
+            </div>
+            <button class="settings-btn" id="settingsBtn" aria-label="Open settings" aria-haspopup="dialog">
+                <i class="fas fa-cog" aria-hidden="true"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ── Tab Navigation ── -->
+    <nav class="tab-nav" role="tablist" aria-label="Main navigation">
+        <button class="tab-btn active" data-tab="convert"
+                role="tab" aria-selected="true"
+                aria-controls="tab-convert" id="tab-btn-convert">
+            <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+            <span>Convert</span>
+        </button>
+        <button class="tab-btn" data-tab="worldclock"
+                role="tab" aria-selected="false"
+                aria-controls="tab-worldclock" id="tab-btn-worldclock">
+            <i class="fas fa-globe" aria-hidden="true"></i>
+            <span>World Clock</span>
+        </button>
+        <button class="tab-btn" data-tab="planner"
+                role="tab" aria-selected="false"
+                aria-controls="tab-planner" id="tab-btn-planner">
+            <i class="fas fa-calendar-check" aria-hidden="true"></i>
+            <span>Planner</span>
+        </button>
+    </nav>
+
+    <!-- ── Main ── -->
+    <main class="main-content" role="main">
+
+        <!-- ══ CONVERT TAB ══ -->
+        <div class="tab-panel" id="tab-convert"
+             role="tabpanel" aria-labelledby="tab-btn-convert">
+
+            <!-- Time input -->
+            <div class="input-group">
+                <label for="timeInput">Enter Time</label>
+                <div class="time-input-container">
+                    <input type="time" id="timeInput" class="time-input" value="09:00">
+                    <div class="format-toggle" role="group" aria-label="Time format">
+                        <button class="format-btn active" data-format="12" aria-pressed="true">12h</button>
+                        <button class="format-btn" data-format="24" aria-pressed="false">24h</button>
+                    </div>
+                </div>
+                <div class="time-presets" role="group" aria-label="Quick time presets">
+                    <button class="preset-btn" data-time="09:00">9 AM</button>
+                    <button class="preset-btn" data-time="12:00">Noon</button>
+                    <button class="preset-btn" data-time="17:00">5 PM</button>
+                    <button class="preset-btn" data-time="00:00">Midnight</button>
+                </div>
+            </div>
+
+            <!-- From / Swap / To — side by side -->
+            <div class="timezone-row">
+                <div class="timezone-col">
+                    <label for="fromTimezone">From</label>
+                    <div class="select-container">
+                        <input type="text" id="fromTimezoneSearch" class="timezone-search"
+                               placeholder="Search…" style="display:none;"
+                               aria-label="Search from timezone">
+                        <select id="fromTimezone" class="timezone-select" aria-label="Source timezone">
+                            <option value="Asia/Manila" selected>GMT+8 (Asia/Manila)</option>
+                        </select>
+                        <button class="search-icon-btn" id="fromSearchToggle" aria-label="Search source timezone">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </button>
+                        <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <button class="swap-btn" id="swapBtn" aria-label="Swap timezones">
+                    <i class="fas fa-arrows-alt-v" aria-hidden="true"></i>
+                </button>
+
+                <div class="timezone-col">
+                    <label for="toTimezone">To</label>
+                    <div class="select-container">
+                        <input type="text" id="toTimezoneSearch" class="timezone-search"
+                               placeholder="Search…" style="display:none;"
+                               aria-label="Search to timezone">
+                        <select id="toTimezone" class="timezone-select" aria-label="Destination timezone">
+                            <option value="">Select timezone…</option>
+                        </select>
+                        <button class="search-icon-btn" id="toSearchToggle" aria-label="Search destination timezone">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </button>
+                        <i class="fas fa-chevron-down select-arrow" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Convert button -->
+            <button class="convert-btn" id="convertBtn" aria-label="Convert time">
+                <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                <span>Convert Time</span>
+            </button>
+
+            <!-- Result card -->
+            <section class="result-section" id="resultSection"
+                     aria-live="polite" aria-label="Conversion result"
+                     style="display:none;">
+                <div class="result-header">
+                    <i class="fas fa-check-circle" aria-hidden="true"></i>
+                    <span>Result</span>
+                </div>
+                <div class="result-content">
+                    <div class="result-item">
+                        <span class="result-label">From</span>
+                        <span class="result-value" id="originalTime">09:00 AM</span>
+                        <span class="result-timezone" id="originalTimezone">Asia/Manila</span>
+                    </div>
+                    <div class="conversion-arrow" aria-hidden="true">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="result-item converted">
+                        <span class="result-label">To</span>
+                        <span class="result-value" id="convertedTime">--:--</span>
+                        <span class="result-timezone" id="convertedTimezone">—</span>
+                    </div>
+                </div>
+                <div class="additional-info" id="additionalInfo">
+                    <div class="info-item">
+                        <i class="fas fa-sun" aria-hidden="true"></i>
+                        <span id="dstInfo">DST info will appear here</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                        <span id="dateInfo">Date info will appear here</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick city shortcuts -->
+            <section class="quick-conversions" aria-label="Quick city conversions">
+                <p class="section-eyebrow">
+                    <i class="fas fa-bolt" aria-hidden="true"></i>
+                    Quick Convert
+                </p>
+                <div class="quick-buttons">
+                    <button class="quick-btn" data-timezone="America/New_York" aria-label="New York time">
+                        <span class="quick-flag">🇺🇸</span>
+                        <span class="quick-city">New York</span>
+                        <span class="quick-time" id="nyTime" aria-live="polite">--:--</span>
+                    </button>
+                    <button class="quick-btn" data-timezone="Europe/London" aria-label="London time">
+                        <span class="quick-flag">🇬🇧</span>
+                        <span class="quick-city">London</span>
+                        <span class="quick-time" id="londonTime" aria-live="polite">--:--</span>
+                    </button>
+                    <button class="quick-btn" data-timezone="Asia/Tokyo" aria-label="Tokyo time">
+                        <span class="quick-flag">🇯🇵</span>
+                        <span class="quick-city">Tokyo</span>
+                        <span class="quick-time" id="tokyoTime" aria-live="polite">--:--</span>
+                    </button>
+                    <button class="quick-btn" data-timezone="Australia/Sydney" aria-label="Sydney time">
+                        <span class="quick-flag">🇦🇺</span>
+                        <span class="quick-city">Sydney</span>
+                        <span class="quick-time" id="sydneyTime" aria-live="polite">--:--</span>
+                    </button>
+                </div>
+            </section>
+
+        </div><!-- #tab-convert -->
+
+        <!-- ══ WORLD CLOCK TAB ══ -->
+        <div class="tab-panel" id="tab-worldclock"
+             role="tabpanel" aria-labelledby="tab-btn-worldclock"
+             style="display:none;">
+            <div class="panel-topbar">
+                <p class="panel-title">World Clocks</p>
+                <button class="add-clock-btn" id="addClockBtn" aria-label="Add world clock">
+                    <i class="fas fa-plus" aria-hidden="true"></i>
+                    Add Clock
+                </button>
+            </div>
+            <div class="world-clocks" id="worldClocks" role="list">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div><!-- #tab-worldclock -->
+
+        <!-- ══ PLANNER TAB ══ -->
+        <div class="tab-panel" id="tab-planner"
+             role="tabpanel" aria-labelledby="tab-btn-planner"
+             style="display:none;">
+            <div class="panel-topbar">
+                <p class="panel-title">Meeting Planner</p>
+            </div>
+            <div class="meeting-time-slots" id="meetingTimeSlots" role="list">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div><!-- #tab-planner -->
+
+    </main>
+
+    <!-- ── Settings Modal ── -->
+    <div class="modal" id="settingsModal"
+         role="dialog" aria-modal="true"
+         aria-labelledby="settingsModalTitle"
+         style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="settingsModalTitle">Settings</h2>
+                <button class="close-btn" id="closeModal" aria-label="Close settings">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-item">
+                    <label for="defaultTimezone">Default Timezone</label>
+                    <select id="defaultTimezone" class="timezone-select">
+                        <option value="Asia/Manila" selected>GMT+8 (Asia/Manila)</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="defaultFormat">Default Time Format</label>
+                    <select id="defaultFormat">
+                        <option value="12">12-hour format</option>
+                        <option value="24">24-hour format</option>
+                    </select>
+                </div>
+                <div class="setting-item setting-item--toggle">
+                    <label for="showDstInfo">Show DST information</label>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="showDstInfo" checked>
+                        <span class="toggle-track" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="setting-item setting-item--toggle">
+                    <label for="autoUpdate">Auto-update current time</label>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="autoUpdate" checked>
+                        <span class="toggle-track" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="setting-item setting-item--toggle">
+                    <label for="meetingPlannerEnabled">Enable meeting planner</label>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="meetingPlannerEnabled" checked>
+                        <span class="toggle-track" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="setting-item setting-item--toggle">
+                    <label for="darkModeToggle">Dark mode</label>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="toggle-track" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="export-import-section">
+                    <button class="secondary-btn" id="exportSettings">
+                        <i class="fas fa-download" aria-hidden="true"></i> Export
+                    </button>
+                    <button class="secondary-btn" id="importSettings">
+                        <i class="fas fa-upload" aria-hidden="true"></i> Import
+                    </button>
+                    <input type="file" id="importFile" accept=".json"
+                           style="display:none;" aria-hidden="true">
+                </div>
+                <button class="save-btn" id="saveSettings">
+                    <i class="fas fa-check" aria-hidden="true"></i> Save Settings
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /.container -->
+<script src="js/timezones.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

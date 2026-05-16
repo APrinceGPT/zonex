@@ -1,0 +1,50 @@
+# ── OS files ──────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# ── Editor & IDE ───────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+
+# ── Node / npm (if tooling is ever added) ─────────────────────
+node_modules/
+npm-debug.log*
+yarn-error.log
+yarn-debug.log
+.pnp/
+.pnp.js
+package-lock.json
+yarn.lock
+
+# ── Build / dist artifacts ────────────────────────────────────
+dist/
+build/
+out/
+*.crx
+*.pem
+*.zip
+*.tar.gz
+
+# ── Environment & secrets ─────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Test coverage ─────────────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ── Chrome extension packaging ────────────────────────────────
+# Keep source icons but ignore generated packed extension files
+*.crx
+key.pem
