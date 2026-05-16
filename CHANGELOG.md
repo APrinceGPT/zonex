@@ -5,6 +5,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.4.1] — 2026-05-16
+
+### Fixed
+- **All linter warnings resolved** in `popup.html` and `css/styles.css` (8 total):
+  - Removed 7× inline `style="display:none;"` attributes from `popup.html`; defaults moved to CSS ID rules (`#resultSection`, `#settingsModal`, `#fromTimezoneSearch`, `#toTimezoneSearch`, `#tab-worldclock`, `#tab-planner`, `#importFile`). JS `element.style.display` assignments continue to work — inline styles set by JS still override CSS rules.
+  - Restored `<meta name="viewport" content="width=device-width, initial-scale=1.0">`. Safe to revert because `body { width: 480px }` is now hard-coded in pixels (not a CSS variable that could be poisoned).
+  - Added `-webkit-backdrop-filter` prefix to `.modal` for Safari 9+ support.
+  - Added `-webkit-user-select` prefix to `.skeleton` for Safari 3+ support.
+
+---
+
 ## [1.4.0] — 2026-05-16
 
 ### Fixed
