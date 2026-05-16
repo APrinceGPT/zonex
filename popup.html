@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=480">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zonex - Timezone Converter</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -81,7 +81,7 @@
                     <label for="fromTimezone">From</label>
                     <div class="select-container">
                         <input type="text" id="fromTimezoneSearch" class="timezone-search"
-                               placeholder="Search…" style="display:none;"
+                               placeholder="Search…"
                                aria-label="Search from timezone">
                         <select id="fromTimezone" class="timezone-select" aria-label="Source timezone">
                             <option value="Asia/Manila" selected>GMT+8 (Asia/Manila)</option>
@@ -101,7 +101,7 @@
                     <label for="toTimezone">To</label>
                     <div class="select-container">
                         <input type="text" id="toTimezoneSearch" class="timezone-search"
-                               placeholder="Search…" style="display:none;"
+                               placeholder="Search…"
                                aria-label="Search to timezone">
                         <select id="toTimezone" class="timezone-select" aria-label="Destination timezone">
                             <option value="">Select timezone…</option>
@@ -122,8 +122,7 @@
 
             <!-- Result card -->
             <section class="result-section" id="resultSection"
-                     aria-live="polite" aria-label="Conversion result"
-                     style="display:none;">
+                     aria-live="polite" aria-label="Conversion result">
                 <div class="result-header">
                     <i class="fas fa-check-circle" aria-hidden="true"></i>
                     <span>Result</span>
@@ -189,8 +188,7 @@
 
         <!-- ══ WORLD CLOCK TAB ══ -->
         <div class="tab-panel" id="tab-worldclock"
-             role="tabpanel" aria-labelledby="tab-btn-worldclock"
-             style="display:none;">
+             role="tabpanel" aria-labelledby="tab-btn-worldclock">
             <div class="panel-topbar">
                 <p class="panel-title">World Clocks</p>
                 <button class="add-clock-btn" id="addClockBtn" aria-label="Add world clock">
@@ -205,8 +203,7 @@
 
         <!-- ══ PLANNER TAB ══ -->
         <div class="tab-panel" id="tab-planner"
-             role="tabpanel" aria-labelledby="tab-btn-planner"
-             style="display:none;">
+             role="tabpanel" aria-labelledby="tab-btn-planner">
             <div class="panel-topbar">
                 <p class="panel-title">Meeting Planner</p>
             </div>
@@ -220,8 +217,7 @@
     <!-- ── Settings Modal ── -->
     <div class="modal" id="settingsModal"
          role="dialog" aria-modal="true"
-         aria-labelledby="settingsModalTitle"
-         style="display:none;">
+         aria-labelledby="settingsModalTitle">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="settingsModalTitle">Settings</h2>
@@ -281,7 +277,7 @@
                         <i class="fas fa-upload" aria-hidden="true"></i> Import
                     </button>
                     <input type="file" id="importFile" accept=".json"
-                           style="display:none;" aria-hidden="true">
+                           aria-hidden="true">
                 </div>
                 <button class="save-btn" id="saveSettings">
                     <i class="fas fa-check" aria-hidden="true"></i> Save Settings
